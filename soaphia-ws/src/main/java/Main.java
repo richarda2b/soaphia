@@ -1,5 +1,6 @@
 import datasource.DataBuilder;
 import datasource.models.Movie;
+import repository.SofiaRepository;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,7 +13,11 @@ import java.util.Optional;
 public class Main {
   public static void main(String [] args) {
 
-    Path filmography = Paths.get(Main.class.getResource("/json-data/movies.json").getPath());
-    Optional<List<Movie>> movies = new DataBuilder().loadMovies(filmography);
+    Optional<SofiaRepository> maybeRepo = DataBuilder.build("/json-data/movies.json", "/json-data/tv-shows.json");
+
+    maybeRepo.ifPresent(repo ->
+            System.out.println("Movies: " + repo.getMovies().size() + ", Tv Shows: " + repo.getTvShows().size()));
+
+    assert (maybeRepo.isPresent());
   }
 }

@@ -18,42 +18,17 @@ import java.util.stream.Collectors;
  */
 public class MoviesDecoder {
 
-  public Optional<List<Movie>> parseFilmography(Path path)
-  {
-    Gson gson = new Gson();
-
-    try
-    {
-      List<String> lines = Files.readAllLines(path);
-      String json = lines.stream().collect(Collectors.joining("\n"));
-
-      return Optional.ofNullable(gson.fromJson(json, Filmography.class).getCast());
-    } catch (IOException io)
-    {
-      return Optional.empty();
+    public static Optional<List<Movie>> decode(String json) {
+        Gson gson = new Gson();
+        return Optional.ofNullable(gson.fromJson(json, Filmography.class).getCast());
     }
-  }
 
-}
+    class Filmography {
+        private String id;
+        private List<Movie> cast;
 
-class Filmography {
-  private String id;
-  private List<Movie> cast;
-
-  public List<Movie> getCast() {
-    return cast;
-  }
-
-  public void setCast(List<Movie> cast) {
-    this.cast = cast;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
+        public List<Movie> getCast() {
+            return cast;
+        }
+    }
 }
