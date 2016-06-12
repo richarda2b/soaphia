@@ -1,6 +1,7 @@
 package repository;
 
 import datasource.models.Movie;
+import datasource.models.Profile;
 import datasource.models.TvShow;
 
 import java.util.ArrayList;
@@ -11,9 +12,11 @@ public class InMemorySofiaRepository implements SofiaRepository {
 
     private Map<String, Movie> movies;
     private Map<String, TvShow> tvShows;
+    private Profile profile;
 
-    public InMemorySofiaRepository(Map<String, Movie> movies, Map<String, TvShow> tvShows)
+    public InMemorySofiaRepository(Profile profile, Map<String, Movie> movies, Map<String, TvShow> tvShows)
     {
+        this.profile = profile;
         this.movies = movies;
         this.tvShows = tvShows;
     }
@@ -32,5 +35,9 @@ public class InMemorySofiaRepository implements SofiaRepository {
         tvShows.addAll(this.tvShows.values());
 
         return tvShows;
+    }
+
+    public Profile getProfile() {
+        return this.profile;
     }
 }

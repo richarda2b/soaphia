@@ -1,20 +1,28 @@
 package datasource.models;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * Created by richard on 5/29/16.
  */
 public class Profile {
   private String id;
+  @SerializedName("profile_path")
   private String profile_path;
   private String popularity;
-  private String place_of_birth;
+  @SerializedName("place_of_birth")
+  private String placeOfBirth;
   private String name;
+  @SerializedName("imdb_id")
   private String imdbId;
   private String adult;
-  private String also_known_as;
+  @SerializedName("also_known_as")
+  private List<String> alsoKnownAs;
   private String biography;
   private String birthday;
-  private String deathDay;
+  private String deathday;
   private String gender;
   private String homepage;
 
@@ -42,12 +50,12 @@ public class Profile {
     this.popularity = popularity;
   }
 
-  public String getPlace_of_birth() {
-    return place_of_birth;
+  public String getPlaceOfBirth() {
+    return placeOfBirth;
   }
 
-  public void setPlace_of_birth(String place_of_birth) {
-    this.place_of_birth = place_of_birth;
+  public void setPlaceOfBirth(String placeOfBirth) {
+    this.placeOfBirth = placeOfBirth;
   }
 
   public String getName() {
@@ -74,12 +82,12 @@ public class Profile {
     this.adult = adult;
   }
 
-  public String getAlso_known_as() {
-    return also_known_as;
+  public List<String> getAlsoKnownAs() {
+    return alsoKnownAs;
   }
 
-  public void setAlso_known_as(String also_known_as) {
-    this.also_known_as = also_known_as;
+  public void setAlsoKnownAs(List<String> alsoKnownAs) {
+    this.alsoKnownAs = alsoKnownAs;
   }
 
   public String getBiography() {
@@ -99,11 +107,11 @@ public class Profile {
   }
 
   public String getDeathday() {
-    return deathDay;
+    return deathday;
   }
 
-  public void setDeathday(String deathDay) {
-    this.deathDay = deathDay;
+  public void setDeathDay(String deathDay) {
+    this.deathday = deathDay;
   }
 
   public String getGender() {

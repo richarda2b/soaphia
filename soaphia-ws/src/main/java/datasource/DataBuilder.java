@@ -1,6 +1,7 @@
 package datasource;
 
 import datasource.decoder.MoviesDecoder;
+import datasource.decoder.ProfileDecoder;
 import datasource.decoder.TvShowDecoder;
 import datasource.models.Movie;
 import datasource.models.Profile;
@@ -15,28 +16,23 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
- * Created by richard on 5/28/16.
- */
 public class DataBuilder {
-    private Profile profile;
-    private Map<String, Movie> movies;
-    private Map<String, TvShow> tvShows;
-
-    private Map<String, String> loadProfile()
+    private static Optional<Profile> loadProfile(String path)
     {
-        return null;
+        return ResourceReader.read(path)
+                             .flatMap(ProfileDecoder::decode);
     }
 
-
-
-    public static Optional<SofiaRepository> build(String moviesPath, String tvShowsPath)
+    public static Optional<SofiaRepository> build(String moviesPath, String tvShowsPath, String profilePath)
     {
         Optional<Map<String, Movie>> maybeMovies = loadMovies(moviesPath);
         Optional<Map<String, TvShow>> maybeTvShows = loadTvShows(tvShowsPath);
+        Optional<Profile> maybeProfile = loadProfile(profilePath);
 
         return maybeMovies.flatMap(movies ->
-                maybeTvShows.map(tvShows -> new InMemorySofiaRepository(movies, tvShows)));
+                maybeTvShows.flatMap(tvShows ->
+                  maybeProfile.map(profile ->
+                     new InMemorySofiaRepository(profile, movies, tvShows))));
     }
 
     private static Optional<Map<String, Movie>> loadMovies(String path)
