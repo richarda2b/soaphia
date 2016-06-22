@@ -1,15 +1,23 @@
 package datasource.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by richard on 5/29/16.
  */
 public class TvShow {
+
+  @SerializedName("poster_path")
   private String posterPath;
+  @SerializedName("original_name")
   private String originalName;
   private String name;
   private String id;
+  @SerializedName("first_air_date")
   private String firstAirDate;
+  @SerializedName("episode_count")
   private String episodeCount;
+  @SerializedName("credit_id")
   private String creditId;
   private String character;
 
