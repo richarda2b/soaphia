@@ -8,11 +8,11 @@ import infrastructure.ResourceReader;
 
 public class ResourceReaderTest {
 
-	@Test
-	public void test() {
+    @Test
+    public void test() {
 
-		Optional<String> content = ResourceReader.read("/json-data/test.json");
-		content.ifPresent(System.out::println);
-		assertNotNull(content);
-	}
+        Optional<String> content = ResourceReader.read("/json-data/test.json");
+        content.ifPresent(System.out::println);
+        assertNotNull(content);
+    }
 }
